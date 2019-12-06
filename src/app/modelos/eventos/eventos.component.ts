@@ -1,35 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { Evento } from '../evento';
+import { EventosServicio } from 'src/app/servicios/eventos-servicio';
 
 @Component({
   selector: 'app-eventos',
   templateUrl: './eventos.component.html',
-  styleUrls: ['./eventos.component.css']
+  styleUrls: ['./eventos.component.css'],
+  providers: [ EventosServicio ]
 })
 export class EventosComponent implements OnInit {
-  eventos: Evento[] = [
-    {
-      nombre: 'Cosquín Rock 2019',
-      lugar: 'AeroclubSanta María de Punilla',
-      fecha: '02-10-2019'
-    },
-    {
-      nombre: 'ArcticMonkeys en Argentina',
-      lugar: 'Hipódromo de San Isidro',
-      fecha: '03-30-2019'
-    },
-    {
-      nombre: 'Lollapalooza Argentina',
-      lugar: 'Hipódromo de San Isidro',
-      fecha: '04-05-2019'
-    },
-    {
-      nombre: 'Iron Maiden en Argentina',
-      lugar: 'Estadio VélezSársfield',
-      fecha: '10-12-2019'
-    }
-  ];
-  constructor() {}
+  eventos: Evento[];
+  constructor(private servicio: EventosServicio) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.eventos = EventosServicio.eventos;
+    // this.servicio.getEventos().subscribe((eventArray) => {
+    //   console.log('nuevo array', eventArray);
+    //   this.eventos = eventArray;
+    // });
+  }
+
 }
